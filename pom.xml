@@ -19,8 +19,8 @@
         <jackson.version>2.7.3</jackson.version>
         <maven.jar.plugin.version>2.6</maven.jar.plugin.version>
         <additionalparam>-Xdoclint:none</additionalparam>
-        <cloudops.releases.repo.url>http://nexus.cloudops.net/repository/plugins-release-local</cloudops.releases.repo.url>
-        <cloudops.snapshots.repo.url>http://nexus.cloudops.net/repository/plugins-snapshot-local</cloudops.snapshots.repo.url>
+        <cloudops.releases.repo.url>http://nexus.cloudops.net/repository/libs-release-local</cloudops.releases.repo.url>
+        <cloudops.snapshots.repo.url>http://nexus.cloudops.net/repository/libs-snapshot-local</cloudops.snapshots.repo.url>
     </properties>
     <distributionManagement>
       <repository>
