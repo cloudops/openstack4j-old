@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.pacesys</groupId>
 		<artifactId>openstack4j-core-integration-test</artifactId>
-		<version>cloudops.3.0.5</version>
+		<version>cloudops.3.0.6</version>
 	</parent>
 	<artifactId>it-jersey2</artifactId>
 	<name>OpenStack4j IntegrationTest Jersey2 Connector</name>

@@ -2,7 +2,7 @@
 	<parent>
 		<groupId>org.pacesys</groupId>
 		<artifactId>openstack4j-parent</artifactId>
-		<version>cloudops.3.0.5</version>
+		<version>cloudops.3.0.6</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>openstack4j-core-integration-test</artifactId>

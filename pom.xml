@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j-parent</artifactId>
-    <version>cloudops.3.0.5</version>
+    <version>cloudops.3.0.6</version>
     <name>OpenStack4j Parent</name>
     <description>OpenStack Java API</description>
     <url>http://github.com/ContainX/openstack4j/</url>
@@ -51,7 +51,7 @@
         <connection>scm:git:git@github.com:cloudops/openstack4j.git</connection>
         <developerConnection>scm:git:git@github.com:cloudops/openstack4j.git</developerConnection>
         <url>http://github.com/cloudops/openstack4j/</url>
-        <tag>cloudops.3.0.5</tag>
+        <tag>cloudops.3.0.6</tag>
     </scm>
     <mailingLists>
         <mailingList>
