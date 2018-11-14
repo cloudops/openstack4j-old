@@ -391,6 +391,7 @@ public class KeystoneProject implements Project {
         }
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Projects extends ListResult<KeystoneProject> {
 
         private static final long serialVersionUID = 1L;

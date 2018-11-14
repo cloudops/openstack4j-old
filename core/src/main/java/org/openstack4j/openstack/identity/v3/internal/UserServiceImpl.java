@@ -135,6 +135,15 @@ public class UserServiceImpl extends BaseIdentityServices implements UserService
      * {@inheritDoc}
      */
     @Override
+    public List<? extends User> list(String domainId) {
+        checkNotNull(domainId);
+        return get(Users.class, uri(PATH_USERS)).param("domain_id", domainId).execute().getList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public List<? extends Role> listProjectUserRoles(String userId, String projectId) {
         checkNotNull(userId);
         checkNotNull(projectId);
