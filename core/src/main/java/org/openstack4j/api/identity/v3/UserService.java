@@ -124,6 +124,13 @@ public interface UserService extends RestService {
 	 * @return list of users
 	 */
 	List<? extends User> list();
+
+	/**
+	 * lists users for domain
+	 *
+	 * @return list of users
+	 */
+	List<? extends User> list(String domainId);
 	
 	/**
      * change password for user.
