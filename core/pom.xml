@@ -26,7 +26,6 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
-							<minimizeJar>true</minimizeJar>
 							<shadedArtifactAttached>true</shadedArtifactAttached>
 							<createSourcesJar>true</createSourcesJar>
 							<shadedClassifierName>withdeps</shadedClassifierName>
@@ -197,11 +196,10 @@
 				<version>2.9.1</version>
 				<configuration>
 					<author>true</author>
-					<protected>true</protected>
 					<excludePackageNames>*.internal</excludePackageNames>
 					<reportOutputDirectory>docs</reportOutputDirectory>
 					<destDir>javadoc</destDir>
-                                        <additionalparam>-Xdoclint:none</additionalparam>
+					<additionalparam>-Xdoclint:none</additionalparam>
 				</configuration>
 			</plugin>
 		</plugins>
