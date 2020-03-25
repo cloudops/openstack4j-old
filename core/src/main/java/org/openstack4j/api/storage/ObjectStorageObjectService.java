@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.common.DLPayload;
 import org.openstack4j.model.common.Payload;
-import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.block.options.DownloadOptions;
 import org.openstack4j.model.storage.object.SwiftObject;
+import org.openstack4j.model.storage.object.options.ObjectDeleteOptions;
 import org.openstack4j.model.storage.object.options.ObjectListOptions;
 import org.openstack4j.model.storage.object.options.ObjectLocation;
-import org.openstack4j.model.storage.object.options.ObjectDeleteOptions;
 import org.openstack4j.model.storage.object.options.ObjectPutOptions;
 
 /**
@@ -38,30 +38,30 @@ public interface ObjectStorageObjectService extends RestService {
      * @return List of File objects including Directories
      */
     List<? extends SwiftObject> list(String containerName, ObjectListOptions options);
-    
+
     /**
      * Gets the specified object based on the ObjectLocation {@code location}
-     * 
+     *
      * @param location the object location
      * @return SwiftObject or null if not found
      */
     SwiftObject get(ObjectLocation location);
-    
+
     /**
      * Gets the specified object based on the {@code containerName} and {@code name} of the object
-     * 
+     *
      * @param containerName the objects container name
-     * @param name the name of the object
+     * @param name          the name of the object
      * @return SwiftObject or null if not found
      */
     SwiftObject get(String containerName, String name);
-    
+
     /**
      * Adds/Updates a file to the specified container
-     * 
+     *
      * @param containerName the container name
-     * @param name the name of the file
-     * @param payload the file payload
+     * @param name          the name of the file
+     * @param payload       the file payload
      * @return the ETAG checksum
      */
     String put(String containerName, String name, Payload<?> payload);
