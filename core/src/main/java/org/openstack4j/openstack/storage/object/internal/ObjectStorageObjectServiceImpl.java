@@ -13,15 +13,15 @@ import java.util.Map;
 
 import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.common.DLPayload;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.common.payloads.FilePayload;
-import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.block.options.DownloadOptions;
 import org.openstack4j.model.storage.object.SwiftObject;
+import org.openstack4j.model.storage.object.options.ObjectDeleteOptions;
 import org.openstack4j.model.storage.object.options.ObjectListOptions;
 import org.openstack4j.model.storage.object.options.ObjectLocation;
-import org.openstack4j.model.storage.object.options.ObjectDeleteOptions;
 import org.openstack4j.model.storage.object.options.ObjectPutOptions;
 import org.openstack4j.openstack.common.DLPayloadEntity;
 import org.openstack4j.openstack.common.functions.HeaderNameValuesToHeaderMap;
@@ -56,8 +56,9 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
 
     @Override
     public List<? extends SwiftObject> list(String containerName, ObjectListOptions options) {
-        if (options == null)
+        if (options == null) {
             return list(containerName);
+        }
         
         checkNotNull(containerName);
         
@@ -66,9 +67,9 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
             return Collections.emptyList();
         }
         return Lists.transform(objs, ApplyContainerToObjectFunction.create(containerName));
-                
+
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -77,18 +78,17 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
         checkNotNull(location);
 
         HttpResponse resp = head(Void.class, location.getURI()).executeWithResponse();
-        try
-        {
-            if (resp.getStatus() == 404)
+        try {
+            if (resp.getStatus() == 404) {
                 return null;
-            
+            }
+
             return ParseObjectFunction.create(location).apply(resp);
-        }
-        finally {
+        } finally {
             closeQuietly(resp);
         }
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -113,27 +113,27 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
         checkNotNull(containerName);
         checkNotNull(options);
 
-        if (payload != null && FilePayload.class.isAssignableFrom(payload.getClass()) && name == null)
+        if (payload != null && FilePayload.class.isAssignableFrom(payload.getClass()) && name == null) {
             name = FilePayload.class.cast(payload).getRaw().getName();
-        else
+        } else {
             checkNotNull(name);
-        
-        
-        if (options.getPath() != null && name.indexOf('/') == -1)
-            name = options.getPath() + "/" + name;
-        
-        HttpResponse resp = put(Void.class, uri("/%s/%s", containerName, name))
-                              .entity(payload)
-                              .headers(options.getOptions())
-                              .contentType(options.getContentType())
-                              .paramLists(options.getQueryParams())
-                              .executeWithResponse();
-        try
-        {
-            return resp.header(ETAG);
         }
-        finally {
-           closeQuietly(resp);
+
+
+        if (options.getPath() != null && name.indexOf('/') == -1) {
+            name = options.getPath() + "/" + name;
+        }
+
+        HttpResponse resp = put(Void.class, uri("/%s/%s", containerName, name))
+                .entity(payload)
+                .headers(options.getOptions())
+                .contentType(options.getContentType())
+                .paramLists(options.getQueryParams())
+                .executeWithResponse();
+        try {
+            return resp.header(ETAG);
+        } finally {
+            closeQuietly(resp);
         }
     }
 
@@ -231,11 +231,12 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
     public DLPayload download(ObjectLocation location, DownloadOptions options) {
         checkNotNull(location);
         checkNotNull(options);
-        
+
         return DLPayloadEntity.create(
-                  get(Void.class, location.getURI())
-                    .headers(HeaderNameValuesToHeaderMap.INSTANCE.apply(options.getHeaders()))
-                    .executeWithResponse()
-               );
+                get(Void.class, location.getURI())
+                        .params(options.getQueryParams())
+                        .headers(HeaderNameValuesToHeaderMap.INSTANCE.apply(options.getHeaders()))
+                        .executeWithResponse()
+        );
     }
 }

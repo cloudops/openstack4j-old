@@ -1,14 +1,13 @@
 package org.openstack4j.openstack.murano.v1.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.MoreObjects;
+import java.util.List;
+
 import org.openstack4j.model.murano.v1.builder.EnvironmentBuilder;
-import org.openstack4j.model.murano.v1.domain.Application;
 import org.openstack4j.model.murano.v1.domain.Environment;
 import org.openstack4j.openstack.common.ListResult;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 
 
 public class MuranoEnvironment implements Environment {
