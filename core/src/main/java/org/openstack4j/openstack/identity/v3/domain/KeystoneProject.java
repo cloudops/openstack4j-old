@@ -26,7 +26,7 @@ import com.google.common.collect.Maps;
  */
 @JsonRootName("project")
 /** If we don't explicitly set extra as an ignore property, it will methods with @JsonAnyGetter/Setter will not work **/
-@JsonIgnoreProperties(value = "extra" , ignoreUnknown = true)
+@JsonIgnoreProperties(value = {"extra", "options"}, ignoreUnknown = true)
 public class KeystoneProject implements Project {
 
     private static final long serialVersionUID = 1L;
@@ -82,8 +82,9 @@ public class KeystoneProject implements Project {
      */
     @Override
     public String getDomainId() {
-        if (domainId == null && domain != null && domain.getId() != null)
+        if (domainId == null && domain != null && domain.getId() != null) {
             domainId = domain.getId();
+        }
         return domainId;
     }
 
@@ -156,6 +157,7 @@ public class KeystoneProject implements Project {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getExtra(String key) {
         return extra.get(key);
     }
@@ -178,7 +180,8 @@ public class KeystoneProject implements Project {
     /**
 	 * @return the tags
 	 */
-	public List<String> getTags() {
+	@Override
+   public List<String> getTags() {
 		return tags;
 	}
 
@@ -236,10 +239,12 @@ public class KeystoneProject implements Project {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null || getClass() != obj.getClass())
+        }
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
+        }
         KeystoneProject that = KeystoneProject.class.cast(obj);
         return Objects.equal(this.id, that.id)
                 && Objects.equal(this.domain, that.domain)
@@ -278,8 +283,9 @@ public class KeystoneProject implements Project {
          */
         @Override
         public ProjectBuilder domain(Domain domain) {
-            if (domain != null && domain.getId() != null)
+            if (domain != null && domain.getId() != null) {
                 model.domainId = domain.getId();
+            }
             return this;
         }
 
@@ -379,8 +385,9 @@ public class KeystoneProject implements Project {
          */
         @Override
         public ProjectBuilder from(Project in) {
-            if (in != null)
+            if (in != null) {
                 this.model = (KeystoneProject) in;
+            }
             return this;
         }
 
